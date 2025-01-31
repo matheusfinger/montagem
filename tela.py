@@ -163,7 +163,7 @@ class TelaPython:
                 match = self.executar_bbduk(diretorio, diretorio2, paired, rev, kmer)
 
             print(f'Análise das reads finalizada. {match} reads mapearam.')
-            contig_fim = self.realizar_montagem(contig, turbo=True)
+            contig_fim = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
             contig = contig_fim
             tam_contig = len(contig_fim)
             print(f'Tamanho do contig gerado nessa iteração: {tam_contig}')
@@ -213,7 +213,7 @@ class TelaPython:
         print("Executando bbduk")
         match = self.executar_bbduk(diretorio, diretorio2, paired, rev, kmer)
         print("Executando cap3")
-        contig_fim = self.realizar_montagem(contig, turbo=False)
+        contig_fim = self.realizar_montagem(contig, turbo=False, iteracao=1)
 
         return contig_fim, len(contig_fim)
 
@@ -249,7 +249,7 @@ class TelaPython:
 
         return match
 
-    def realizar_montagem(self, contig, turbo):
+    def realizar_montagem(self, contig, turbo, iteracao):
         if turbo:
             arq1 = open("resultado1.fasta")
             filtradas1 = arq1.readlines()
@@ -262,23 +262,36 @@ class TelaPython:
             arq = open("resultado.fasta")
             filtradas = arq.readlines()
             arq.close()
-
-        with open('matches.fa', 'w') as arquivo:
-            arquivo.write(">contig1\n")
-            arquivo.write(f"{contig}\n")
-            arquivo.write(">contig2\n")
-            arquivo.write(f"{contig}\n")
-            if turbo:
+        
+        if (not turbo) or (turbo and iteracao == 1):
+            with open('matches.fa', 'w') as arquivo:
+                arquivo.write(">contig1\n")
+                arquivo.write(f"{contig}\n")
+                arquivo.write(">contig2\n")
+                arquivo.write(f"{contig}\n")
+                if turbo:
+                    for linha in filtradas1:
+                        arquivo.write(linha)
+                    for linha in filtradas2:
+                        arquivo.write(linha)
+                if not turbo:
+                    for linha in filtradas:
+                        arquivo.write(linha)
+        else:
+            with open('matches.fa', 'w') as arquivo_matches:
+                with open('matches.fa.cap.contigs', 'r') as arquivo_contigs:
+                    for linha in arquivo_contigs:
+                        arquivo_matches.write(linha)
                 for linha in filtradas1:
-                    arquivo.write(linha)
+                    arquivo_matches.write(linha)
                 for linha in filtradas2:
-                    arquivo.write(linha)
-            if not turbo:
-                for linha in filtradas:
-                    arquivo.write(linha)
+                    arquivo_matches.write(linha)
 
         print("Iniciando montagem.")
-        os.system("cap3 matches.fa -p 99 > consenso")
+        if turbo:
+            os.system("cap3 matches.fa -p 95 > consenso")
+        else:
+            os.system("cap3 matches.fa -p 95 > consenso")
 
         contigs = []
         contig_atual = ""
