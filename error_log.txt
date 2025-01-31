@@ -1,0 +1,42 @@
+2025-01-30 14:35:12,908 - ERROR - Erro ao processar sequenciamento: [Errno 2] No such file or directory: 'matches.fa.cap.contigs'
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 161, in modo_turbo
+    contig_fim = self.realizar_montagem(contig, turbo=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 279, in realizar_montagem
+    with open('matches.fa.cap.contigs', 'r') as arquivo:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'matches.fa.cap.contigs'
+2025-01-30 14:36:46,978 - ERROR - Erro ao processar sequenciamento: [Errno 2] No such file or directory: 'matches.fa.cap.contigs'
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 161, in modo_turbo
+    contig_fim = self.realizar_montagem(contig, turbo=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 279, in realizar_montagem
+    with open('matches.fa.cap.contigs', 'r') as arquivo:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'matches.fa.cap.contigs'
+2025-01-30 14:39:26,944 - ERROR - Erro ao processar sequenciamento: [Errno 2] No such file or directory: 'matches.fa.cap.contigs'
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 161, in modo_turbo
+    contig_fim = self.realizar_montagem(contig, turbo=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 279, in realizar_montagem
+    with open('matches.fa.cap.contigs', 'r') as arquivo:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'matches.fa.cap.contigs'

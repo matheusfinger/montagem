@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Montagem
+Exec=/home/bioinformatica/Documentos/montagem/iniciar_montagem.sh
+Terminal=true
+Type=Application
+Icon=/home/bioinformatica/Documentos/montagem/dna.png
+Path=/home/bioinformatica/Documentos/montagem
