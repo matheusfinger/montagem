@@ -91,7 +91,7 @@ class TelaPython:
         self.remover_arquivos_passados()
 
         if turbo:
-            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig)
+            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
         else:
             contig_final, tamanho = self.modo_normal(diretorio, diretorio2, paired, rev, kmer, contig)
 
@@ -150,7 +150,7 @@ class TelaPython:
         return res
 
 
-    def modo_turbo(self, diretorio, diretorio2, paired, rev, kmer, contig):
+    def modo_turbo(self, diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc):
         continuar = True
         volta = 0
         pula = False
@@ -171,8 +171,8 @@ class TelaPython:
             if match >= 3 and volta < 50 and tam_contig < 3000 and num_pula < 4:
                 volta += 1
                 antigo = kmer
-                kmer1 = self.definir_kmer(contig_fim, None, False, inicio=True)
-                kmer2 = self.definir_kmer(contig_fim, None, False, inicio=False)
+                kmer1 = self.definir_kmer(contig_fim, voltar, voltar_nuc, inicio=True)
+                kmer2 = self.definir_kmer(contig_fim, voltar, voltar_nuc, inicio=False)
                 kmer = (kmer1, kmer2)
                 kmer0_rev = self.reverso_complemento(kmer[0])
                 kmer1_rev = self.reverso_complemento(kmer[1])
