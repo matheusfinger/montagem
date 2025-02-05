@@ -1,104 +1,167 @@
 No file of quality values (.qual) is found
 No file of constraints (.con) is found.
-Pair of identical reads: SRR23559228.15049440 and SRR23559228.46614459
-Pair of identical reads: SRR23559228.15049440 and SRR23559228.46587212
-Pair of identical reads: SRR23559228.15049440 and SRR23559228.46587212
-Pair of identical reads: SRR23559228.46587212 and SRR23559228.46614459
-Pair of identical reads: SRR23559228.59862399 and SRR23559228.59863260
-Pair of identical reads: SRR23559228.59862399 and SRR23559228.59863260
-Pair of identical reads: SRR23559228.75097925 and SRR23559228.75097790
-Pair of identical reads: SRR23559228.75097925 and SRR23559228.75097790
-Pair of identical reads: SRR23559228.51940593 and SRR23559228.52018623
-Pair of identical reads: SRR23559228.56656907 and SRR23559228.56657126
-Pair of identical reads: SRR23559228.56656907 and SRR23559228.56657126
-Pair of identical reads: SRR23559228.80721053 and SRR23559228.80727186
-Pair of identical reads: SRR23559228.80721053 and SRR23559228.80721507
-Pair of identical reads: SRR23559228.80721053 and SRR23559228.80727186
-Pair of identical reads: SRR23559228.80721053 and SRR23559228.80721507
-Pair of identical reads: SRR23559228.80721507 and SRR23559228.80727186
-Pair of identical reads: SRR23559228.80721507 and SRR23559228.80727186
-Pair of identical reads: SRR23559228.99843449 and SRR23559228.99843503
-Pair of identical reads: SRR23559228.99843449 and SRR23559228.99843503
-Number of overlaps saved: 518
+Pair of identical reads: SRR16119290.152257 and SRR16119290.8873345
+Pair of identical reads: SRR16119290.529181 and SRR16119290.11126588
+Pair of identical reads: SRR16119290.529181 and SRR16119290.2538764
+Pair of identical reads: SRR16119290.529181 and SRR16119290.13319366
+Pair of identical reads: SRR16119290.529181 and SRR16119290.11126588
+Pair of identical reads: SRR16119290.529181 and SRR16119290.2538764
+Pair of identical reads: SRR16119290.1863409 and SRR16119290.16400525
+Pair of identical reads: SRR16119290.1863409 and SRR16119290.16400525
+Pair of identical reads: SRR16119290.2465296 and SRR16119290.10244969
+Pair of identical reads: SRR16119290.2465296 and SRR16119290.10244969
+Pair of identical reads: SRR16119290.2538764 and SRR16119290.13319366
+Pair of identical reads: SRR16119290.2538764 and SRR16119290.11126588
+Pair of identical reads: SRR16119290.2538764 and SRR16119290.11126588
+Pair of identical reads: SRR16119290.5208938 and SRR16119290.14209992
+Pair of identical reads: SRR16119290.5208938 and SRR16119290.14209992
+Pair of identical reads: SRR16119290.5716972 and SRR16119290.9517956
+Pair of identical reads: SRR16119290.5716972 and SRR16119290.9517956
+Pair of identical reads: SRR16119290.5716972 and SRR16119290.9517593
+Pair of identical reads: SRR16119290.9491102 and SRR16119290.12108869
+Pair of identical reads: SRR16119290.9491102 and SRR16119290.12108869
+Pair of identical reads: SRR16119290.9517593 and SRR16119290.9517956
+Pair of identical reads: SRR16119290.11126588 and SRR16119290.13319366
+Pair of identical reads: SRR16119290.11486437 and SRR16119290.17317302
+Pair of identical reads: SRR16119290.11486437 and SRR16119290.16597493
+Pair of identical reads: SRR16119290.11486437 and SRR16119290.11961847
+Pair of identical reads: SRR16119290.11486437 and SRR16119290.11486445
+Pair of identical reads: SRR16119290.11486437 and SRR16119290.17317302
+Pair of identical reads: SRR16119290.11486437 and SRR16119290.16597493
+Pair of identical reads: SRR16119290.11486437 and SRR16119290.11961847
+Pair of identical reads: SRR16119290.11486437 and SRR16119290.11486445
+Pair of identical reads: SRR16119290.11486445 and SRR16119290.17317302
+Pair of identical reads: SRR16119290.11486445 and SRR16119290.16597493
+Pair of identical reads: SRR16119290.11486445 and SRR16119290.11961847
+Pair of identical reads: SRR16119290.11486445 and SRR16119290.17317302
+Pair of identical reads: SRR16119290.11486445 and SRR16119290.16597493
+Pair of identical reads: SRR16119290.11486445 and SRR16119290.11961847
+Pair of identical reads: SRR16119290.11961847 and SRR16119290.17317302
+Pair of identical reads: SRR16119290.11961847 and SRR16119290.16597493
+Pair of identical reads: SRR16119290.11961847 and SRR16119290.17317302
+Pair of identical reads: SRR16119290.11961847 and SRR16119290.16597493
+Pair of identical reads: SRR16119290.16597493 and SRR16119290.17317302
+Pair of identical reads: SRR16119290.16597493 and SRR16119290.17317302
+Pair of identical reads: SRR16119290.5608718 and SRR16119290.12509899
+Pair of identical reads: SRR16119290.5608718 and SRR16119290.11866279
+Pair of identical reads: SRR16119290.5608718 and SRR16119290.9164992
+Pair of identical reads: SRR16119290.5608718 and SRR16119290.5737814
+Pair of identical reads: SRR16119290.5608718 and SRR16119290.12509899
+Pair of identical reads: SRR16119290.5608718 and SRR16119290.11866279
+Pair of identical reads: SRR16119290.5608718 and SRR16119290.9164992
+Pair of identical reads: SRR16119290.5737814 and SRR16119290.12509899
+Pair of identical reads: SRR16119290.5737814 and SRR16119290.11866279
+Pair of identical reads: SRR16119290.5737814 and SRR16119290.9164992
+Pair of identical reads: SRR16119290.9164992 and SRR16119290.12509899
+Pair of identical reads: SRR16119290.9164992 and SRR16119290.11866279
+Pair of identical reads: SRR16119290.9164992 and SRR16119290.12509899
+Pair of identical reads: SRR16119290.9164992 and SRR16119290.11866279
+Pair of identical reads: SRR16119290.11866279 and SRR16119290.12509899
+Pair of identical reads: SRR16119290.11866279 and SRR16119290.12509899
+Pair of identical reads: SRR16119290.17570525 and SRR16119290.17572759
+Pair of identical reads: SRR16119290.17570525 and SRR16119290.17572759
+Number of overlaps saved: 842
 ComputeOverlap done
 IdentifyChimeras done
-Number of overlaps removed: 0
+Overlap SRR16119290.3367521+ and SRR16119290.17317302+  P  qualscore     0  score    280  identity 0.75
+Overlap SRR16119290.3367521+ and SRR16119290.16597493+  P  qualscore     0  score    280  identity 0.75
+Overlap SRR16119290.3367521+ and SRR16119290.11961847+  P  qualscore     0  score    280  identity 0.75
+Overlap SRR16119290.3367521+ and SRR16119290.11486445+  P  qualscore     0  score    280  identity 0.75
+Overlap SRR16119290.3367521+ and SRR16119290.11486437+  P  qualscore     0  score    280  identity 0.75
+Overlap SRR16119290.9491102+ and SRR16119290.17317302+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.9491102+ and SRR16119290.16597493+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.9491102+ and SRR16119290.11961847+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.9491102+ and SRR16119290.11486445+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.9491102+ and SRR16119290.11486437+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.10030554+ and SRR16119290.17317302+  P  qualscore     0  score      0  identity 0.71
+Overlap SRR16119290.10030554+ and SRR16119290.16597493+  P  qualscore     0  score      0  identity 0.71
+Overlap SRR16119290.10030554+ and SRR16119290.11961847+  P  qualscore     0  score      0  identity 0.71
+Overlap SRR16119290.10030554+ and SRR16119290.11486445+  P  qualscore     0  score      0  identity 0.71
+Overlap SRR16119290.10030554+ and SRR16119290.11486437+  P  qualscore     0  score      0  identity 0.71
+Overlap SRR16119290.11486437+ and Contig1-  C  qualscore     0  score   1060  identity 0.81
+Overlap SRR16119290.11486445+ and Contig1-  C  qualscore     0  score   1060  identity 0.81
+Overlap SRR16119290.11961847+ and Contig1-  C  qualscore     0  score   1060  identity 0.81
+Overlap SRR16119290.12108869+ and SRR16119290.17317302+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.12108869+ and SRR16119290.16597493+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.12108869+ and SRR16119290.11961847+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.12108869+ and SRR16119290.11486445+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.12108869+ and SRR16119290.11486437+  P  qualscore     0  score    220  identity 0.74
+Overlap SRR16119290.16597493+ and Contig1-  C  qualscore     0  score   1060  identity 0.81
+Overlap SRR16119290.17317302+ and Contig1-  C  qualscore     0  score   1060  identity 0.81
+Number of overlaps removed: 25
 RemovePoorOverlaps done
 ASSEM done
 ComputDistForContigs done
 PresentLayout done
-Clip Contig1 left clip: 1, right clip: 228,  length: 228,  right size 0
-Clip SRR23559228.46614459 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.22691021 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.15049440 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.46587212 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.94231527 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip Contig2 left clip: 1, right clip: 283,  length: 283,  right size 0
-Clip SRR23559228.43566606 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.7594644 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.46587212 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.15049440 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.46614459 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.47024338 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.59862399 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.22691021 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.59863260 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.75097925 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.75097790 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.75097925 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.75097790 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.81252002 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.92901338 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.94231527 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.96458263 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip Contig3 left clip: 1, right clip: 367,  length: 368,  right size 1
-Clip SRR23559228.7594644 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.59862399 left clip: 1, right clip: 149,  length: 150,  right size 1
-Clip SRR23559228.59863260 left clip: 1, right clip: 149,  length: 150,  right size 1
-Clip SRR23559228.43566606 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.47024338 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.81252002 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.92901338 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.96458263 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip Contig4 left clip: 1, right clip: 940,  length: 940,  right size 0
-Clip SRR23559228.112714274 left clip: 1, right clip: 144,  length: 150,  right size 6
-Clip SRR23559228.52018623 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.1334242 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.1334242 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.7956537 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.7956537 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.11426903 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.11426903 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.19953145 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.19953145 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.27117338 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.27117338 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.36601895 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.36601895 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.39881661 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.39881661 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.51636524 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.51636524 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.51940593 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.51940593 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.52018623 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.56577469 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.56577469 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.56656907 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.56657126 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.56656907 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.56657126 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.80721507 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.80721053 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.80727186 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.80721507 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.80721053 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.80727186 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.99843449 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.99843503 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.99843449 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.99843503 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.110867257 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.111905004 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.111905004 left clip: 1, right clip: 150,  length: 150,  right size 0
-Clip SRR23559228.112714274 left clip: 1, right clip: 150,  length: 150,  right size 0
+Clip SRR16119290.5716972 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.9517956 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.5436065 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.152257 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.8873345 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.3254199 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.529181 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.13319366 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.2538764 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11126588 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.1863409 left clip: 2, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.16400525 left clip: 2, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.2465296 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.10244969 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.5436065 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.8873345 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.5208938 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.14209992 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11486437 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.16597493 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11961847 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11486445 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.17317302 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.7548012 left clip: 5, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.529181 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11126588 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.2538764 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.13319366 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.3367521 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.5716972 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.9517593 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.9517956 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.152257 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.7548012 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.10030554 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.1863409 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.16400525 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.2465296 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.10244969 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.3254199 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.9491102 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.12108869 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip Contig1 left clip: 1, right clip: 750,  length: 750,  right size 0
+Clip SRR16119290.5737814 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.18940483 left clip: 3, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.3367521 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.10030554 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11151258 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11151258 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.9491102 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.12108869 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.5208938 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.14209992 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11866279 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.9164992 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.5737814 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.5608718 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.12509899 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11866279 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.9164992 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.5608718 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.12509899 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.17570525 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.17572759 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.18940483 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11486437 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.16597493 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11961847 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.11486445 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.17317302 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.17570525 left clip: 1, right clip: 151,  length: 151,  right size 0
+Clip SRR16119290.17572759 left clip: 1, right clip: 151,  length: 151,  right size 0

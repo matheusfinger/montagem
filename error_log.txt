@@ -90,3 +90,59 @@ Traceback (most recent call last):
     contig_fim = self.realizar_montagem(contig, turbo=False, iteracao=1)
                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: TelaPython.realizar_montagem() missing 1 required positional argument: 'iteracao'
+2025-02-05 13:22:49,461 - ERROR - Erro ao processar sequenciamento: TelaPython.contig_with_most_reads() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contig_fim = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 328, in realizar_montagem
+    id_contig_formado, num_reads = self.contig_with_most_reads("consenso")
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TelaPython.contig_with_most_reads() takes 1 positional argument but 2 were given
+2025-02-05 13:30:19,012 - ERROR - Erro ao processar sequenciamento: TelaPython.contig_with_most_reads() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contig_fim = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 328, in realizar_montagem
+    id_contig_formado, num_reads = self.contig_with_most_reads("consenso")
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TelaPython.contig_with_most_reads() takes 1 positional argument but 2 were given
+2025-02-05 13:32:57,609 - ERROR - Erro ao processar sequenciamento: TelaPython.contig_with_most_reads() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contig_fim = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 328, in realizar_montagem
+    tupla = self.contig_with_most_reads("consenso")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TelaPython.contig_with_most_reads() takes 1 positional argument but 2 were given
+2025-02-05 13:34:27,680 - ERROR - Erro ao processar sequenciamento: TelaPython.contig_with_most_reads() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contig_fim = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 328, in realizar_montagem
+    tupla = self.contig_with_most_reads("consenso")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TelaPython.contig_with_most_reads() takes 1 positional argument but 2 were given

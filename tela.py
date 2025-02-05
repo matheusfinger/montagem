@@ -168,7 +168,7 @@ class TelaPython:
             tam_contig = len(contig_fim)
             print(f'Tamanho do contig gerado nessa iteração: {tam_contig}')
 
-            if match >= 3 and volta < 50 and tam_contig < 3000 and num_pula < 4:
+            if match >= 3 and volta < 2 and tam_contig < 3000 and num_pula < 4:
                 volta += 1
                 antigo = kmer
                 kmer1 = self.definir_kmer(contig_fim, voltar, voltar_nuc, inicio=True)
@@ -249,6 +249,36 @@ class TelaPython:
 
         return match
 
+    def contig_with_most_reads(self, arquivo):
+        max_reads = 0
+        num_reads = 0
+        last_contig = False
+        with open(arquivo) as arq:
+            line = arq.readline()
+            while not line.startswith('******************* Contig'):
+                line = arq.readline()
+            actual_contig = line.strip()
+            actual_contig = actual_contig.strip("*")
+            actual_contig = actual_contig.strip(" ")
+            while line:
+                if (line.startswith('******************* Contig') and num_reads != 0) or last_contig:
+                    if num_reads > max_reads:
+                        max_reads = num_reads
+                        max_contig = actual_contig
+                    num_reads = 0
+                    actual_contig = line.strip()
+                    actual_contig = actual_contig.strip("*")
+                    actual_contig = actual_contig.strip(" ")
+                    if last_contig:
+                        break
+                elif not line.startswith('*'):
+                    num_reads += 1
+                line = arq.readline()
+                if line.startswith('DETAILED DISPLAY OF CONTIGS'):
+                    last_contig = True
+                    num_reads -= 1
+        return (max_contig, max_reads)
+
     def realizar_montagem(self, contig, turbo, iteracao):
         if turbo:
             arq1 = open("resultado1.fasta")
@@ -288,30 +318,28 @@ class TelaPython:
                     arquivo_matches.write(linha)
 
         print("Iniciando montagem.")
-        if turbo:
-            os.system("cap3 matches.fa -p 95 > consenso")
-        else:
-            os.system("cap3 matches.fa -p 95 > consenso")
+        os.system("cap3 matches.fa -p 95 > consenso")
 
-        contigs = []
-        contig_atual = ""
+        tupla = self.contig_with_most_reads("consenso")
+        
+        id_contig_formado, num_reads = tupla
+        
+        id_contig_formado = id_contig_formado.replace(" ", "")
+        contig_formado = ""
+        print(id_contig_formado)
 
         with open('matches.fa.cap.contigs', 'r') as arquivo:
-            for linha in arquivo:
-                if linha.startswith('>'):
-                    if contig_atual:
-                        contigs.append(contig_atual)
-                    contig_atual = ""
-                else:
-                    contig_atual += linha.strip()
+            linha = arquivo.readline()
+            while not linha.startswith(f'>{id_contig_formado}'):
+                linha = arquivo.readline()
+            linha = arquivo.readline()
+            while linha and not linha.startswith('>'):
+                contig_formado += linha.strip()
+                linha = arquivo.readline()
 
-        if contig_atual:
-            contigs.append(contig_atual)
-
-        maior_contig = max(contigs, key=len, default="")
         print("Montagem feita.")
 
-        return maior_contig
+        return contig_formado
 
 if __name__ == "__main__":
     tela = TelaPython()
