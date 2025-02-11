@@ -155,6 +155,7 @@ class TelaPython:
         volta = 0
         pula = False
         num_pula = 0
+        id_contig = None
         while continuar:
             print(f'{volta + 1}ª iteração iniciada.')
             print(datetime.datetime.now())
@@ -163,12 +164,14 @@ class TelaPython:
                 match = self.executar_bbduk(diretorio, diretorio2, paired, rev, kmer)
 
             print(f'Análise das reads finalizada. {match} reads mapearam.')
-            contig_fim = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+            contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+            contig_fim = contigs[1]
+            id_contig = contigs[2]
             contig = contig_fim
             tam_contig = len(contig_fim)
             print(f'Tamanho do contig gerado nessa iteração: {tam_contig}')
 
-            if match >= 3 and volta < 2 and tam_contig < 3000 and num_pula < 4:
+            if match >= 3 and volta < 50 and tam_contig < 3000 and num_pula < 4:
                 volta += 1
                 antigo = kmer
                 kmer1 = self.definir_kmer(contig_fim, voltar, voltar_nuc, inicio=True)
@@ -197,6 +200,7 @@ class TelaPython:
                 else:
                     pula = False
             else:
+                contig_fim = contigs[0]
                 continuar = False
                 if match < 3:
                     print(f'Parou na {volta + 1}ª iteração por falta de matches.')
@@ -213,7 +217,7 @@ class TelaPython:
         print("Executando bbduk")
         match = self.executar_bbduk(diretorio, diretorio2, paired, rev, kmer)
         print("Executando cap3")
-        contig_fim = self.realizar_montagem(contig, turbo=False, iteracao=1)
+        contig_fim = self.realizar_montagem(contig, id_contig=None, turbo=False, iteracao=1)
 
         return contig_fim, len(contig_fim)
 
@@ -249,37 +253,161 @@ class TelaPython:
 
         return match
 
-    def contig_with_most_reads(self, arquivo):
+    def tamanho_contigs(self, arquivo: str):
+        tamanhos = []
+
+    def contig_with_most_reads(self, arquivo, contig_anterior):
         max_reads = 0
         num_reads = 0
+        max_contig = None
+        # Checa se é o último contig
         last_contig = False
         with open(arquivo) as arq:
             line = arq.readline()
-            while not line.startswith('******************* Contig'):
+            # Lê até achar o começo da descrição dos contigs
+            while line and not line.startswith('******************* Contig'):
                 line = arq.readline()
+            # actual_contig pega o nome do contig atual
             actual_contig = line.strip()
             actual_contig = actual_contig.strip("*")
             actual_contig = actual_contig.strip(" ")
+            # Variável que diz se o contig possui o contig anterior
+            contains = False
             while line:
+                # Checa se já chegou no próximo contig
                 if (line.startswith('******************* Contig') and num_reads != 0) or last_contig:
-                    if num_reads > max_reads:
+                    if num_reads > max_reads and contains:
                         max_reads = num_reads
                         max_contig = actual_contig
                     num_reads = 0
                     actual_contig = line.strip()
                     actual_contig = actual_contig.strip("*")
                     actual_contig = actual_contig.strip(" ")
+                    # Reseta variável dizendo que contém o contig anterior
+                    contains = False
                     if last_contig:
                         break
                 elif not line.startswith('*'):
+                    if (contig_anterior is not None and line.startswith(contig_anterior)) or (contig_anterior is None):
+                        contains = True
                     num_reads += 1
                 line = arq.readline()
                 if line.startswith('DETAILED DISPLAY OF CONTIGS'):
                     last_contig = True
                     num_reads -= 1
-        return (max_contig, max_reads)
+        if max_contig is not None:
+            return max_contig
+        else:
+            print("Nessa iteração não foi possível achar contig com o contig anterior")
+            return self.contig_with_most_reads("consenso", contig_anterior=None)
+    
+    def extract_contig_with_coverage(self, cap3_output, contig_name, contig_anterior, iteracao, coverage_threshold=3):
+        # Ler o arquivo de saída do CAP3
+        with open(cap3_output, 'r') as file:
+            line = file.readline()
+            cont = 0
+            while line and cont < 2:
+                if line.startswith(f'******************* {contig_name} ********************'):
+                    cont += 1
+                line = file.readline()
+            line = file.readline()
 
-    def realizar_montagem(self, contig, turbo, iteracao):
+            contig_final = ""
+            
+            # Variável para guardar sequências acima do consenso
+            seqs = []
+
+            achou_comeco = False
+
+            achou_comeco_anterior = False
+            comeco_anterior = 0
+            fim_anterior = 0
+            if contig_anterior is not None:
+                print(f'O contig anterior era: {contig_anterior}')
+
+            while line and not (line.startswith('******************* Contig')):
+                
+                if not(line.startswith("*") or line.startswith(" ") or len(line.strip()) == 0 or line.startswith("consensus")):
+                    seqs.append(line.strip("\n"))
+
+
+                if contig_anterior is not None:
+                    if line.startswith(contig_anterior) and not achou_comeco_anterior:
+                        line = line.strip("\n")
+                        seq = line
+                        comeco_seq = line.split(" ")
+                        comeco_seq = " ".join(comeco_seq[1:])
+                        comeco_seq = len(comeco_seq)
+                        for i in range(len(line)-comeco_seq, len(line)):
+                            if seq[i] != ' ':
+                                comeco_anterior = i + len(contig_final)
+                                achou_comeco_anterior = True
+                                break
+                    
+                    if line.startswith(contig_anterior):
+                        line = line.strip("\n")
+                        seq = line
+                        comeco_seq = line.split(" ")
+                        comeco_seq = " ".join(comeco_seq[1:])
+                        comeco_seq = len(comeco_seq)
+                        for i in range(len(line)-1, len(line)-comeco_seq-1, -1):
+                            if seq[i] != ' ':
+                                fim_anterior = i + len(contig_final)
+                                break
+
+
+
+
+                if line.startswith("consensus"):
+                    line = line.strip()
+                    contig_seq = line.split(" ")
+                    contig_seq = contig_seq[len(contig_seq)-1]
+                    comeco_analise = len(line) - len(contig_seq)
+                    fim_analise = len(line)
+
+
+                    # Calcular a cobertura para cada posição
+                    coverage = [0] * len(contig_seq)
+                    for seq in seqs:
+                        j = 0
+                        for i in range(comeco_analise, fim_analise):
+                            base = seq[i]
+                            if base != ' ':  # Ignorar espaços (bases não alinhadas)
+                                coverage[j] += 1
+                            j = j + 1
+                    if not achou_comeco:
+                        # Encontrar a posição inicial onde a cobertura é >= 3
+                        start_position = 0
+                        for i, cov in enumerate(coverage):
+                            if cov >= coverage_threshold:
+                                achou_comeco = True
+                                start_position = i + len(contig_final)
+                                break
+
+                    # Encontrar a posição final onde a cobertura é >= 3
+                    for i in range(len(coverage) - 1, -1, -1):
+                        if coverage[i] >= coverage_threshold:
+                            end_position = i + 1 + len(contig_final)
+                            break
+
+                    contig_final += line[comeco_analise:fim_analise]
+
+                    # Apagar sequências para vir próximo consensus.
+                    seqs = []
+
+                line = file.readline()
+
+        if achou_comeco_anterior:
+            start_position = min(comeco_anterior, start_position)
+            end_position = max(fim_anterior, end_position)
+        elif iteracao != 1:
+            print("O contig da iteração anterior não está presente nos contigs da iteração atual.")
+        # Cortar o contig até as posições de início e fim
+        trimmed_contig = contig_final[start_position:end_position]
+
+        return trimmed_contig
+
+    def realizar_montagem(self, contig, id_contig, turbo, iteracao):
         if turbo:
             arq1 = open("resultado1.fasta")
             filtradas1 = arq1.readlines()
@@ -320,17 +448,21 @@ class TelaPython:
         print("Iniciando montagem.")
         os.system("cap3 matches.fa -p 95 > consenso")
 
-        tupla = self.contig_with_most_reads("consenso")
-        
-        id_contig_formado, num_reads = tupla
+        id_contig_formado = self.contig_with_most_reads("consenso", id_contig)
+
+
+        if turbo:
+            contig_trimmado = self.extract_contig_with_coverage("consenso", id_contig_formado, id_contig, iteracao)
+
+            if len(contig_trimmado) < len(contig):
+                print("DIMINUIU DIMINUIU DIMINUIU")
         
         id_contig_formado = id_contig_formado.replace(" ", "")
         contig_formado = ""
-        print(id_contig_formado)
 
         with open('matches.fa.cap.contigs', 'r') as arquivo:
             linha = arquivo.readline()
-            while not linha.startswith(f'>{id_contig_formado}'):
+            while linha and not linha.startswith(f'>{id_contig_formado}'):
                 linha = arquivo.readline()
             linha = arquivo.readline()
             while linha and not linha.startswith('>'):
@@ -339,7 +471,9 @@ class TelaPython:
 
         print("Montagem feita.")
 
-        return contig_formado
+        if turbo:
+            return (contig_formado, contig_trimmado, id_contig_formado)
+        else: return contig_formado
 
 if __name__ == "__main__":
     tela = TelaPython()

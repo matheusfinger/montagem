@@ -146,3 +146,330 @@ Traceback (most recent call last):
     tupla = self.contig_with_most_reads("consenso")
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: TelaPython.contig_with_most_reads() takes 1 positional argument but 2 were given
+2025-02-06 12:39:23,860 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'max_contig' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contigs = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 393, in realizar_montagem
+    tupla = self.contig_with_most_reads("consenso", len(contig))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 282, in contig_with_most_reads
+    return (max_contig, max_reads)
+            ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'max_contig' where it is not associated with a value
+2025-02-06 12:43:09,376 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'max_contig' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contigs = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 393, in realizar_montagem
+    tupla = self.contig_with_most_reads("consenso", len(contig))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 282, in contig_with_most_reads
+    return (max_contig, max_reads)
+            ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'max_contig' where it is not associated with a value
+2025-02-06 12:45:58,271 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'max_contig' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contigs = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 393, in realizar_montagem
+    tupla = self.contig_with_most_reads("consenso", len(contig))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 282, in contig_with_most_reads
+    return (max_contig, max_reads)
+            ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'max_contig' where it is not associated with a value
+2025-02-06 12:47:24,183 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'max_contig' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contigs = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 393, in realizar_montagem
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 282, in contig_with_most_reads
+    num_reads -= 1
+    ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'max_contig' where it is not associated with a value
+2025-02-06 12:48:55,232 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'max_contig' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contigs = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 393, in realizar_montagem
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 282, in contig_with_most_reads
+    line = arq.readline()
+    ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'max_contig' where it is not associated with a value
+2025-02-06 12:55:13,108 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'max_contig' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 167, in modo_turbo
+    contigs = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 400, in realizar_montagem
+    tupla = self.contig_with_most_reads("consenso", len(contig))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 287, in contig_with_most_reads
+    return (max_contig, max_reads)
+            ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'max_contig' where it is not associated with a value
+2025-02-06 12:59:00,851 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'max_contig' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 167, in modo_turbo
+    contigs = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 398, in realizar_montagem
+    tupla = self.contig_with_most_reads("consenso", len(contig))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 287, in contig_with_most_reads
+    return (max_contig, max_reads)
+            ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'max_contig' where it is not associated with a value
+2025-02-06 13:55:35,550 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'contig_formado' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 167, in modo_turbo
+    contigs = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 401, in realizar_montagem
+    if len(contig_formado) < len(contig):
+           ^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'contig_formado' where it is not associated with a value
+2025-02-06 13:59:52,674 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'contig_formado' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 166, in modo_turbo
+    contigs = self.realizar_montagem(contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 400, in realizar_montagem
+UnboundLocalError: cannot access local variable 'contig_formado' where it is not associated with a value
+2025-02-07 10:03:00,651 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'max_contig' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 49, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 94, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 167, in modo_turbo
+    contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 407, in realizar_montagem
+    tupla = self.contig_with_most_reads("consenso", id_contig)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 297, in contig_with_most_reads
+    return (max_contig, max_reads)
+            ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'max_contig' where it is not associated with a value
+2025-02-07 15:09:03,060 - ERROR - Erro ao processar sequenciamento: maximum recursion depth exceeded
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 51, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 98, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc, cobertura)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 171, in modo_turbo
+    contigs = self.realizar_montagem(contig, cobertura=cobertura, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 473, in realizar_montagem
+    id_contig_formado = self.maior_contig("consenso", id_contig)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 357, in maior_contig
+    return self.maior_contig("consenso", contig_anterior=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 357, in maior_contig
+    return self.maior_contig("consenso", contig_anterior=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 357, in maior_contig
+    return self.maior_contig("consenso", contig_anterior=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 990 more times]
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 314, in maior_contig
+    with open(arquivo) as arq:
+         ^^^^^^^^^^^^^
+  File "<frozen codecs>", line 310, in __init__
+RecursionError: maximum recursion depth exceeded
+2025-02-07 15:49:09,323 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'end_position' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 51, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 98, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc, cobertura)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 171, in modo_turbo
+    contigs = self.realizar_montagem(contig, cobertura=cobertura, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 475, in realizar_montagem
+    contig_trimmado = self.extract_contig_with_coverage("consenso", id_contig_formado)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 422, in extract_contig_with_coverage
+    trimmed_contig = contig_final[start_position:end_position]
+                                                 ^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'end_position' where it is not associated with a value
+2025-02-10 13:13:08,530 - ERROR - Erro ao processar sequenciamento: maximum recursion depth exceeded
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 51, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 98, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc, cobertura)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 171, in modo_turbo
+    contigs = self.realizar_montagem(contig, cobertura=cobertura, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 497, in realizar_montagem
+    id_contig_formado = self.contig_with_most_reads("consenso", id_contig)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 306, in contig_with_most_reads
+    return self.contig_with_most_reads("consenso", contig_anterior=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 306, in contig_with_most_reads
+    return self.contig_with_most_reads("consenso", contig_anterior=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 306, in contig_with_most_reads
+    return self.contig_with_most_reads("consenso", contig_anterior=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 990 more times]
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 269, in contig_with_most_reads
+    with open(arquivo) as arq:
+         ^^^^^^^^^^^^^
+  File "<frozen codecs>", line 310, in __init__
+RecursionError: maximum recursion depth exceeded
+2025-02-10 13:34:20,769 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'end_position' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 51, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 98, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc, cobertura)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 171, in modo_turbo
+    contigs = self.realizar_montagem(contig, cobertura=cobertura, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 506, in realizar_montagem
+    contig_trimmado = self.extract_contig_with_coverage("consenso", id_contig_formado, id_contig, iteracao)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 453, in extract_contig_with_coverage
+    trimmed_contig = contig_final[start_position:end_position]
+                                                 ^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'end_position' where it is not associated with a value
+2025-02-10 13:46:25,940 - ERROR - Erro ao processar sequenciamento: string index out of range
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 51, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 98, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc, cobertura)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 171, in modo_turbo
+    contigs = self.realizar_montagem(contig, cobertura=cobertura, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 506, in realizar_montagem
+    contig_trimmado = self.extract_contig_with_coverage("consenso", id_contig_formado, id_contig, iteracao)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 401, in extract_contig_with_coverage
+    if seq[i] != ' ':
+       ~~~^^^
+IndexError: string index out of range
+2025-02-10 13:54:08,686 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'contig_seq' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 51, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 98, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc, cobertura)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 171, in modo_turbo
+    contigs = self.realizar_montagem(contig, cobertura=cobertura, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 506, in realizar_montagem
+    contig_trimmado = self.extract_contig_with_coverage("consenso", id_contig_formado, id_contig, iteracao)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 392, in extract_contig_with_coverage
+    for i in range(len(line)-len(contig_seq), len(line)):
+                                 ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'contig_seq' where it is not associated with a value
+2025-02-10 14:02:55,167 - ERROR - Erro ao processar sequenciamento: cannot access local variable 'seq' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 51, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 98, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc, cobertura)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 171, in modo_turbo
+    contigs = self.realizar_montagem(contig, cobertura=cobertura, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 512, in realizar_montagem
+    contig_trimmado = self.extract_contig_with_coverage("consenso", id_contig_formado, id_contig, iteracao)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 396, in extract_contig_with_coverage
+    if seq[i] != ' ':
+       ^^^
+UnboundLocalError: cannot access local variable 'seq' where it is not associated with a value
+2025-02-10 14:07:43,095 - ERROR - Erro ao processar sequenciamento: maximum recursion depth exceeded
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 51, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 98, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc, cobertura)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 171, in modo_turbo
+    contigs = self.realizar_montagem(contig, cobertura=cobertura, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 506, in realizar_montagem
+    if cobertura:
+                  
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 306, in contig_with_most_reads
+    return self.contig_with_most_reads("consenso", contig_anterior=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 306, in contig_with_most_reads
+    return self.contig_with_most_reads("consenso", contig_anterior=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 306, in contig_with_most_reads
+    return self.contig_with_most_reads("consenso", contig_anterior=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 990 more times]
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 269, in contig_with_most_reads
+    with open(arquivo) as arq:
+         ^^^^^^^^^^^^^
+  File "<frozen codecs>", line 310, in __init__
+RecursionError: maximum recursion depth exceeded
