@@ -1,8 +1,9 @@
 import os
-import time
 import datetime
 import PySimpleGUI as sg
 import logging
+
+diminuicoes = 1
 
 # Configuração do logging
 logging.basicConfig(filename='error_log.txt', level=logging.ERROR, 
@@ -23,11 +24,14 @@ class TelaPython:
                 sg.Text('', size=(15, 2)),
                 sg.Text('Localização da segunda biblioteca', size=(25, 2)),
                 sg.Input(size=(50, 0), key='diretorio2'), sg.FileBrowse()]])],
-            [sg.Checkbox('Considerar reverso complemento', key='rev', default=True)],
+            [
+                sg.Text('Qual será o tamanho do k-mer utilizado?', size=(40, 2)),
+                sg.Input(size=(15,0), key='kmer_size')
+            ],
             [sg.Text("Deseja alongar a extremidade 3' ou 5'?"),
              sg.Radio("5'", "extremidade", key="5", default=True), sg.Radio("3'", "extremidade", key="3")],
             [sg.Frame('', [[
-                sg.Checkbox('Deseja que o 25-mer seja antes das extremidades?', key='voltar'),
+                sg.Checkbox('Deseja que o k-mer seja antes das extremidades?', key='voltar'),
                 sg.Text('', size=(15, 2)),
                 sg.Text('Se você marcou sim, quantos nucleotídeos deseja se afastar da extremidade?', size=(45, 3)),
                 sg.Input(size=(15, 0), key='voltar_nuc')]])],
@@ -54,6 +58,11 @@ class TelaPython:
     def processar_sequenciamento(self, values):
         seq = values['seq']
         diretorio = values['diretorio']
+        try:
+            kmer_size = int(values['kmer_size'])
+        except ValueError:
+            sg.popup_error("Insira um número válido para o tamanho do k-mer.")
+            return
 
         if not diretorio or not os.path.exists(diretorio):
             sg.popup_error("Arquivo da biblioteca não encontrado!")
@@ -61,7 +70,6 @@ class TelaPython:
 
         paired = values['paired']
         diretorio2 = values['diretorio2']
-        rev = values['rev']
         extremidade5 = values['5']
         extremidade3 = values['3']
         voltar = values['voltar']
@@ -80,20 +88,20 @@ class TelaPython:
         contig = self.preparar_contig(seq)
 
         if not turbo and extremidade5:
-            kmer = self.definir_kmer(contig, voltar, voltar_nuc, inicio=True)
+            kmer = self.definir_kmer(contig, kmer_size, voltar, voltar_nuc, inicio=True)
         elif not turbo:
-            kmer = self.definir_kmer(contig, voltar, voltar_nuc, inicio=False)
+            kmer = self.definir_kmer(contig, kmer_size, voltar, voltar_nuc, inicio=False)
         else:
-            kmer1 = self.definir_kmer(contig, voltar, voltar_nuc, inicio=True)
-            kmer2 = self.definir_kmer(contig, voltar, voltar_nuc, inicio=False)
+            kmer1 = self.definir_kmer(contig, kmer_size, voltar, voltar_nuc, inicio=True)
+            kmer2 = self.definir_kmer(contig, kmer_size, voltar, voltar_nuc, inicio=False)
             kmer = (kmer1, kmer2)
 
         self.remover_arquivos_passados()
 
         if turbo:
-            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc)
+            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc)
         else:
-            contig_final, tamanho = self.modo_normal(diretorio, diretorio2, paired, rev, kmer, contig)
+            contig_final, tamanho = self.modo_normal(diretorio, diretorio2, paired, kmer, kmer_size, contig)
 
         print(f"O maior contig gerado foi:\n{contig_final}\nO contig possui tamanho {tamanho}.")
 
@@ -111,17 +119,17 @@ class TelaPython:
 
         return contig
 
-    def definir_kmer(self, contig, voltar, voltar_nuc, inicio=True):
+    def definir_kmer(self, contig, kmer_size, voltar, voltar_nuc, inicio=True):
         if inicio:
             if voltar:
-                return contig[0 + voltar_nuc:25 + voltar_nuc]
+                return contig[0 + voltar_nuc:kmer_size + voltar_nuc]
             else:
-                return contig[0:25]
+                return contig[0:kmer_size]
         else:
             if voltar:
-                return contig[len(contig) - 25 - voltar_nuc:len(contig) - voltar_nuc]
+                return contig[len(contig) - kmer_size - voltar_nuc:len(contig) - voltar_nuc]
             else:
-                return contig[len(contig) - 25:len(contig)]
+                return contig[len(contig) - kmer_size:len(contig)]
 
     def remover_arquivos_passados(self):
         print("Apagando resultados anteriores...")
@@ -150,7 +158,7 @@ class TelaPython:
         return res
 
 
-    def modo_turbo(self, diretorio, diretorio2, paired, rev, kmer, contig, voltar, voltar_nuc):
+    def modo_turbo(self, diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc):
         continuar = True
         volta = 0
         pula = False
@@ -161,7 +169,7 @@ class TelaPython:
             print(datetime.datetime.now())
             
             if not pula:
-                match = self.executar_bbduk(diretorio, diretorio2, paired, rev, kmer)
+                match = self.executar_bbduk(diretorio, diretorio2, paired, kmer, kmer_size)
 
             print(f'Análise das reads finalizada. {match} reads mapearam.')
             contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, iteracao = volta + 1)
@@ -174,8 +182,8 @@ class TelaPython:
             if match >= 3 and volta < 50 and tam_contig < 3000 and num_pula < 4:
                 volta += 1
                 antigo = kmer
-                kmer1 = self.definir_kmer(contig_fim, voltar, voltar_nuc, inicio=True)
-                kmer2 = self.definir_kmer(contig_fim, voltar, voltar_nuc, inicio=False)
+                kmer1 = self.definir_kmer(contig_fim, kmer_size, voltar, voltar_nuc, inicio=True)
+                kmer2 = self.definir_kmer(contig_fim, kmer_size, voltar, voltar_nuc, inicio=False)
                 kmer = (kmer1, kmer2)
                 kmer0_rev = self.reverso_complemento(kmer[0])
                 kmer1_rev = self.reverso_complemento(kmer[1])
@@ -213,33 +221,33 @@ class TelaPython:
 
         return contig_fim, len(contig_fim)
 
-    def modo_normal(self, diretorio, diretorio2, paired, rev, kmer, contig):
+    def modo_normal(self, diretorio, diretorio2, paired, kmer, kmer_size, contig):
         print("Executando bbduk")
-        match = self.executar_bbduk(diretorio, diretorio2, paired, rev, kmer)
+        match = self.executar_bbduk(diretorio, diretorio2, paired, kmer, kmer_size)
         print("Executando cap3")
         contig_fim = self.realizar_montagem(contig, id_contig=None, turbo=False, iteracao=1)
 
         return contig_fim, len(contig_fim)
 
-    def executar_bbduk(self, diretorio, diretorio2, paired, rev, kmer):
+    def executar_bbduk(self, diretorio, diretorio2, paired, kmer, kmer_size):
         if type(kmer) is tuple:
             kmer1, kmer2 = kmer
             if paired:
                 print("Analisando kmer 5'")
-                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=resultado1.fasta rcomp={rev} mm=f k=25 threads=6 literal={kmer1}')
+                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=resultado1.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
                 print("Analisando kmer 3'")
-                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=resultado2.fasta rcomp={rev} mm=f k=25 threads=6 literal={kmer2}')
+                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=resultado2.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
             else:
                 print("Analisando kmer 5'")
-                os.system(f'bbduk.sh in={diretorio} outm=resultado.fasta rcomp={rev} mm=f k=25 threads=6 literal={kmer1}')
+                os.system(f'bbduk.sh in={diretorio} outm=resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
                 print("Analisando kmer 3'")
-                os.system(f'bbduk.sh in={diretorio} outm=resultado.fasta rcomp={rev} mm=f k=25 threads=6 literal={kmer2}')
+                os.system(f'bbduk.sh in={diretorio} outm=resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
             return self.contar_reads("resultado1.fasta") + self.contar_reads("resultado2.fasta")
         else:
             if paired:
-                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=resultado.fasta rcomp={rev} mm=f k=25 threads=6 literal={kmer}')
+                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
             else:
-                os.system(f'bbduk.sh in={diretorio} outm=resultado.fasta rcomp={rev} mm=f k=25 threads=6 literal={kmer}')
+                os.system(f'bbduk.sh in={diretorio} outm=resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
 
             return self.contar_reads("resultado.fasta")
 
@@ -364,7 +372,7 @@ class TelaPython:
                     contig_seq = contig_seq[len(contig_seq)-1]
                     comeco_analise = len(line) - len(contig_seq)
                     fim_analise = len(line)
-
+                    end_position = None
 
                     # Calcular a cobertura para cada posição
                     coverage = [0] * len(contig_seq)
@@ -398,6 +406,15 @@ class TelaPython:
                 line = file.readline()
 
         if achou_comeco_anterior:
+            if end_position is None:
+                end_position = fim_anterior
+            if contig_anterior is not None:
+                print(f'Contig anterior: {contig_anterior}')
+            print(f'Começo anterior: {comeco_anterior}')
+            print(f'Fim anterior: {comeco_anterior}')
+            print(f'Start_position: {start_position}')
+            if end_position is not None:
+                print(f'End position: {end_position}')
             start_position = min(comeco_anterior, start_position)
             end_position = max(fim_anterior, end_position)
         elif iteracao != 1:
@@ -446,7 +463,7 @@ class TelaPython:
                     arquivo_matches.write(linha)
 
         print("Iniciando montagem.")
-        os.system("cap3 matches.fa -p 95 > consenso")
+        os.system("cap3 matches.fa -p 98 > consenso")
 
         id_contig_formado = self.contig_with_most_reads("consenso", id_contig)
 
@@ -456,6 +473,7 @@ class TelaPython:
 
             if len(contig_trimmado) < len(contig):
                 print("DIMINUIU DIMINUIU DIMINUIU")
+                raise ValueError
         
         id_contig_formado = id_contig_formado.replace(" ", "")
         contig_formado = ""
