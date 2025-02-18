@@ -36,8 +36,13 @@ class TelaPython:
                 sg.Text('Se você marcou sim, quantos nucleotídeos deseja se afastar da extremidade?', size=(45, 3)),
                 sg.Input(size=(15, 0), key='voltar_nuc')]])],
             [sg.Checkbox('Deseja usar o modo TURBO?', key='turbo')],
+            [sg.Frame('', [[
+                sg.Checkbox('Deseja parar as iterações pelo tamanho?', key='parar_tamanho'),
+                sg.Text('', size=(15, 2)),
+                sg.Text('Se você marcou sim, a partir de qual tamanho deseja parar?', size=(45, 3)),
+                sg.Input(size=(15, 0), key='qtd_parar')]])],
             [sg.Button('Enviar dados')],
-            [sg.Output(size=(200, 15), key='saida')]
+            [sg.Output(size=(200, 10), key='saida')]
         ]
 
         self.janela = sg.Window("Montagem", layout)
@@ -81,9 +86,22 @@ class TelaPython:
             except ValueError:
                 sg.popup_error("Insira um número válido em 'voltar nucleotídeos'.")
                 return
-
+            
         turbo = values['turbo']
+        parar_tamanho = values['parar_tamanho']
+        qtd_parar = 0
+
+        if values['qtd_parar']:
+            try:
+                qtd_parar = int(values['qtd_parar'])
+            except ValueError:
+                sg.popup_error("Insira um número válido de nucleotídeos para parar")
+                return
+
         self.janela['saida'].update('')  # Limpa o output
+        
+        if not os.path.exists("temp"):
+            os.makedirs("temp")
 
         contig = self.preparar_contig(seq)
 
@@ -99,7 +117,7 @@ class TelaPython:
         self.remover_arquivos_passados()
 
         if turbo:
-            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc)
+            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar)
         else:
             contig_final, tamanho = self.modo_normal(diretorio, diretorio2, paired, kmer, kmer_size, contig)
 
@@ -133,14 +151,14 @@ class TelaPython:
 
     def remover_arquivos_passados(self):
         print("Apagando resultados anteriores...")
-        if os.path.exists("matches.fa.cap.contigs"):
-            os.remove("matches.fa.cap.contigs")
-        if os.path.exists("resultado.fa"):
-            os.remove("resultado.fa")
-        if os.path.exists("resultado1.fa"):
-            os.remove("resultado1.fa")
-        if os.path.exists("resultado2.fa"):
-            os.remove("resultado2.fa")
+        if os.path.exists("temp/matches.fa.cap.contigs"):
+            os.remove("temp/matches.fa.cap.contigs")
+        if os.path.exists("temp/resultado.fa"):
+            os.remove("temp/resultado.fa")
+        if os.path.exists("temp/resultado1.fa"):
+            os.remove("temp/resultado1.fa")
+        if os.path.exists("temp/resultado2.fa"):
+            os.remove("temp/resultado2.fa")
 
     def reverso_complemento(self, seq):
         res = ""
@@ -158,7 +176,7 @@ class TelaPython:
         return res
 
 
-    def modo_turbo(self, diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc):
+    def modo_turbo(self, diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar):
         continuar = True
         volta = 0
         pula = False
@@ -179,7 +197,12 @@ class TelaPython:
             tam_contig = len(contig_fim)
             print(f'Tamanho do contig gerado nessa iteração: {tam_contig}')
 
-            if match >= 3 and volta < 50 and tam_contig < 3000 and num_pula < 4:
+            tamanho = True
+
+            if parar_tamanho:
+                tamanho = tam_contig < qtd_parar
+
+            if match >= 3 and volta < 50 and tamanho and num_pula < 4:
                 volta += 1
                 antigo = kmer
                 kmer1 = self.definir_kmer(contig_fim, kmer_size, voltar, voltar_nuc, inicio=True)
@@ -234,22 +257,22 @@ class TelaPython:
             kmer1, kmer2 = kmer
             if paired:
                 print("Analisando kmer 5'")
-                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=resultado1.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
+                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=temp/resultado1.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
                 print("Analisando kmer 3'")
-                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=resultado2.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
+                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=temp/resultado2.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
             else:
                 print("Analisando kmer 5'")
-                os.system(f'bbduk.sh in={diretorio} outm=resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
+                os.system(f'bbduk.sh in={diretorio} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
                 print("Analisando kmer 3'")
-                os.system(f'bbduk.sh in={diretorio} outm=resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
-            return self.contar_reads("resultado1.fasta") + self.contar_reads("resultado2.fasta")
+                os.system(f'bbduk.sh in={diretorio} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
+            return self.contar_reads("temp/resultado1.fasta") + self.contar_reads("temp/resultado2.fasta")
         else:
             if paired:
-                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
+                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
             else:
-                os.system(f'bbduk.sh in={diretorio} outm=resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
+                os.system(f'bbduk.sh in={diretorio} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
 
-            return self.contar_reads("resultado.fasta")
+            return self.contar_reads("temp/resultado.fasta")
 
     def contar_reads(self, arquivo):
         match = 0
@@ -307,7 +330,7 @@ class TelaPython:
             return max_contig
         else:
             print("Nessa iteração não foi possível achar contig com o contig anterior")
-            return self.contig_with_most_reads("consenso", contig_anterior=None)
+            return self.contig_with_most_reads("temp/consenso", contig_anterior=None)
     
     def extract_contig_with_coverage(self, cap3_output, contig_name, contig_anterior, iteracao, coverage_threshold=3):
         # Ler o arquivo de saída do CAP3
@@ -408,13 +431,6 @@ class TelaPython:
         if achou_comeco_anterior:
             if end_position is None:
                 end_position = fim_anterior
-            if contig_anterior is not None:
-                print(f'Contig anterior: {contig_anterior}')
-            print(f'Começo anterior: {comeco_anterior}')
-            print(f'Fim anterior: {comeco_anterior}')
-            print(f'Start_position: {start_position}')
-            if end_position is not None:
-                print(f'End position: {end_position}')
             start_position = min(comeco_anterior, start_position)
             end_position = max(fim_anterior, end_position)
         elif iteracao != 1:
@@ -426,20 +442,20 @@ class TelaPython:
 
     def realizar_montagem(self, contig, id_contig, turbo, iteracao):
         if turbo:
-            arq1 = open("resultado1.fasta")
+            arq1 = open("temp/resultado1.fasta")
             filtradas1 = arq1.readlines()
             arq1.close()
-            arq2 = open("resultado2.fasta")
+            arq2 = open("temp/resultado2.fasta")
             filtradas2 = arq2.readlines()
             arq2.close()
 
         else:
-            arq = open("resultado.fasta")
+            arq = open("temp/resultado.fasta")
             filtradas = arq.readlines()
             arq.close()
         
         if (not turbo) or (turbo and iteracao == 1):
-            with open('matches.fa', 'w') as arquivo:
+            with open('temp/matches.fa', 'w') as arquivo:
                 arquivo.write(">contig1\n")
                 arquivo.write(f"{contig}\n")
                 arquivo.write(">contig2\n")
@@ -453,32 +469,37 @@ class TelaPython:
                     for linha in filtradas:
                         arquivo.write(linha)
         else:
-            with open('matches.fa', 'w') as arquivo_matches:
-                with open('matches.fa.cap.contigs', 'r') as arquivo_contigs:
+            with open('temp/matches.fa', 'w') as arquivo_matches:
+                with open('temp/matches.fa.cap.contigs', 'r') as arquivo_contigs:
+                    cont = 1
                     for linha in arquivo_contigs:
+                        if linha.startswith(">"):
+                            cont = cont + 1
                         arquivo_matches.write(linha)
+                arquivo_matches.write(f'>contig{cont}\n')
+                arquivo_matches.write(f'{contig}\n')
                 for linha in filtradas1:
                     arquivo_matches.write(linha)
                 for linha in filtradas2:
                     arquivo_matches.write(linha)
 
         print("Iniciando montagem.")
-        os.system("cap3 matches.fa -p 98 > consenso")
+        os.system("cap3 temp/matches.fa -p 98 > temp/consenso")
 
-        id_contig_formado = self.contig_with_most_reads("consenso", id_contig)
+        id_contig_formado = self.contig_with_most_reads("temp/consenso", id_contig)
 
 
         if turbo:
-            contig_trimmado = self.extract_contig_with_coverage("consenso", id_contig_formado, id_contig, iteracao)
+            contig_trimmado = self.extract_contig_with_coverage("temp/consenso", id_contig_formado, id_contig, iteracao)
 
             if len(contig_trimmado) < len(contig):
-                print("DIMINUIU DIMINUIU DIMINUIU")
+                print("O contig diminuiu")
                 raise ValueError
         
         id_contig_formado = id_contig_formado.replace(" ", "")
         contig_formado = ""
 
-        with open('matches.fa.cap.contigs', 'r') as arquivo:
+        with open('temp/matches.fa.cap.contigs', 'r') as arquivo:
             linha = arquivo.readline()
             while linha and not linha.startswith(f'>{id_contig_formado}'):
                 linha = arquivo.readline()

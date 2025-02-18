@@ -500,3 +500,29 @@ Traceback (most recent call last):
     kmer1 = self.definir_kmer(contig_fim, voltar, voltar_nuc, inicio=True)
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: TelaPython.definir_kmer() missing 1 required positional argument: 'voltar_nuc'
+2025-02-15 12:38:44,542 - ERROR - Erro ao processar sequenciamento: 
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 53, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 102, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 175, in modo_turbo
+    contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 476, in realizar_montagem
+    raise ValueError
+ValueError
+2025-02-17 16:31:57,089 - ERROR - Erro ao processar sequenciamento: 
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 53, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 102, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 175, in modo_turbo
+    contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 476, in realizar_montagem
+    raise ValueError
+ValueError
