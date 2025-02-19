@@ -28,8 +28,8 @@ class TelaPython:
                 sg.Text('Qual será o tamanho do k-mer utilizado?', size=(40, 2)),
                 sg.Input(size=(15,0), key='kmer_size')
             ],
-            [sg.Text("Deseja alongar a extremidade 3' ou 5'?"),
-             sg.Radio("5'", "extremidade", key="5", default=True), sg.Radio("3'", "extremidade", key="3")],
+            [sg.Text("Deseja alongar a extremidade 3', 5' ou ambas?"),
+             sg.Radio("5'", "extremidade", key="5", default=True), sg.Radio("3'", "extremidade", key="3"), sg.Radio("Ambas", "extremidade", key="ambas")],
             [sg.Frame('', [[
                 sg.Checkbox('Deseja que o k-mer seja antes das extremidades?', key='voltar'),
                 sg.Text('', size=(15, 2)),
@@ -77,6 +77,14 @@ class TelaPython:
         diretorio2 = values['diretorio2']
         extremidade5 = values['5']
         extremidade3 = values['3']
+        ambas = values['ambas']
+
+        if extremidade5:
+            extremidade = '5'
+        elif extremidade3:
+            extremidade = '3'
+        else: extremidade = 'ambas'
+
         voltar = values['voltar']
         voltar_nuc = 0
 
@@ -105,9 +113,9 @@ class TelaPython:
 
         contig = self.preparar_contig(seq)
 
-        if not turbo and extremidade5:
+        if extremidade5:
             kmer = self.definir_kmer(contig, kmer_size, voltar, voltar_nuc, inicio=True)
-        elif not turbo:
+        elif extremidade3:
             kmer = self.definir_kmer(contig, kmer_size, voltar, voltar_nuc, inicio=False)
         else:
             kmer1 = self.definir_kmer(contig, kmer_size, voltar, voltar_nuc, inicio=True)
@@ -117,7 +125,7 @@ class TelaPython:
         self.remover_arquivos_passados()
 
         if turbo:
-            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar)
+            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, extremidade, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar)
         else:
             contig_final, tamanho = self.modo_normal(diretorio, diretorio2, paired, kmer, kmer_size, contig)
 
@@ -176,12 +184,14 @@ class TelaPython:
         return res
 
 
-    def modo_turbo(self, diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar):
+    def modo_turbo(self, diretorio, diretorio2, paired, kmer, kmer_size, extremidade, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar):
         continuar = True
         volta = 0
         pula = False
         num_pula = 0
-        id_contig = None
+        id_contig = "contig1"
+        if type(kmer) == tuple:
+            rev = False
         while continuar:
             print(f'{volta + 1}ª iteração iniciada.')
             print(datetime.datetime.now())
@@ -190,7 +200,10 @@ class TelaPython:
                 match = self.executar_bbduk(diretorio, diretorio2, paired, kmer, kmer_size)
 
             print(f'Análise das reads finalizada. {match} reads mapearam.')
-            contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, iteracao = volta + 1)
+            if type(kmer) == tuple:
+                contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, ambas=True, iteracao = volta + 1)
+            else:
+                contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, ambas=False, iteracao = volta + 1)
             contig_fim = contigs[1]
             id_contig = contigs[2]
             contig = contig_fim
@@ -205,31 +218,44 @@ class TelaPython:
             if match >= 3 and volta < 50 and tamanho and num_pula < 4:
                 volta += 1
                 antigo = kmer
-                kmer1 = self.definir_kmer(contig_fim, kmer_size, voltar, voltar_nuc, inicio=True)
-                kmer2 = self.definir_kmer(contig_fim, kmer_size, voltar, voltar_nuc, inicio=False)
-                kmer = (kmer1, kmer2)
-                kmer0_rev = self.reverso_complemento(kmer[0])
-                kmer1_rev = self.reverso_complemento(kmer[1])
-                if antigo[0] == kmer[0]:
-                    if antigo[1] == kmer[1] or antigo[1] == kmer1_rev:
-                        if pula:
-                            num_pula += 1
+                if type(kmer) == tuple:
+                    kmer1 = self.definir_kmer(contig_fim, kmer_size, voltar, voltar_nuc, inicio=True)
+                    kmer2 = self.definir_kmer(contig_fim, kmer_size, voltar, voltar_nuc, inicio=False)
+                    kmer = (kmer1, kmer2)
+                    kmer0_rev = self.reverso_complemento(kmer[0])
+                    kmer1_rev = self.reverso_complemento(kmer[1])
+                    if antigo[0] == kmer[0]:
+                        if antigo[1] == kmer[1] or antigo[1] == kmer1_rev:
+                            if pula:
+                                num_pula += 1
+                            else:
+                                num_pula = 1
+                            pula = True
                         else:
-                            num_pula = 1
-                        pula = True
-                    else:
-                        pula = False
-                elif antigo[0] == kmer0_rev:
-                    if antigo[1] == kmer[1] or antigo[1] == kmer1_rev:
-                        if pula:
-                            num_pula += 1
+                            pula = False
+                    elif antigo[0] == kmer0_rev:
+                        if antigo[1] == kmer[1] or antigo[1] == kmer1_rev:
+                            if pula:
+                                num_pula += 1
+                            else:
+                                num_pula = 1
+                            pula = True
                         else:
-                            num_pula = 1
-                        pula = True
+                            pula = False
                     else:
                         pula = False
                 else:
-                    pula = False
+                    if extremidade == '5':
+                        kmer = self.definir_kmer(contig_fim, kmer_size, voltar, voltar_nuc, inicio=True)
+                    else:
+                        kmer = self.definir_kmer(contig_fim, kmer_size, voltar, voltar_nuc, inicio=False)
+                    if kmer == antigo and pula:
+                        num_pula += 1
+                    elif kmer == antigo:
+                        pula = True
+                        num_pula = 1
+                    elif pula:
+                        pula = False
             else:
                 contig_fim = contigs[0]
                 continuar = False
@@ -238,7 +264,7 @@ class TelaPython:
                 elif tam_contig >= 3000:
                     print(f'Parou pq o tamanho do contig passou do corte')
                 elif num_pula >= 4:
-                    print(f'Ta repetindo os kmers')
+                    print(f'Ta repetindo o(s) kmer(s)')
                 else:
                     print('Número máximo de iterações alcançado.')
 
@@ -248,7 +274,11 @@ class TelaPython:
         print("Executando bbduk")
         match = self.executar_bbduk(diretorio, diretorio2, paired, kmer, kmer_size)
         print("Executando cap3")
-        contig_fim = self.realizar_montagem(contig, id_contig=None, turbo=False, iteracao=1)
+
+        if type(kmer) == tuple:
+            contig_fim = self.realizar_montagem(contig, id_contig=None, turbo=False, ambas=True, iteracao=1)
+        else:
+            contig_fim = self.realizar_montagem(contig, id_contig=None, turbo=False, ambas=False, iteracao=1)
 
         return contig_fim, len(contig_fim)
 
@@ -291,6 +321,7 @@ class TelaPython:
         max_reads = 0
         num_reads = 0
         max_contig = None
+        rev = None
         # Checa se é o último contig
         last_contig = False
         with open(arquivo) as arq:
@@ -310,6 +341,7 @@ class TelaPython:
                     if num_reads > max_reads and contains:
                         max_reads = num_reads
                         max_contig = actual_contig
+                        rev = rev_temp
                     num_reads = 0
                     actual_contig = line.strip()
                     actual_contig = actual_contig.strip("*")
@@ -319,15 +351,20 @@ class TelaPython:
                     if last_contig:
                         break
                 elif not line.startswith('*'):
+                    line = line.strip(" ")
                     if (contig_anterior is not None and line.startswith(contig_anterior)) or (contig_anterior is None):
                         contains = True
+                        if line[len(contig_anterior):len(contig_anterior)+1] == '+':
+                            rev_temp = False
+                        else:
+                            rev_temp = True
                     num_reads += 1
                 line = arq.readline()
                 if line.startswith('DETAILED DISPLAY OF CONTIGS'):
                     last_contig = True
                     num_reads -= 1
         if max_contig is not None:
-            return max_contig
+            return (max_contig, rev)
         else:
             print("Nessa iteração não foi possível achar contig com o contig anterior")
             return self.contig_with_most_reads("temp/consenso", contig_anterior=None)
@@ -353,8 +390,6 @@ class TelaPython:
             achou_comeco_anterior = False
             comeco_anterior = 0
             fim_anterior = 0
-            if contig_anterior is not None:
-                print(f'O contig anterior era: {contig_anterior}')
 
             while line and not (line.startswith('******************* Contig')):
                 
@@ -367,7 +402,7 @@ class TelaPython:
                         line = line.strip("\n")
                         seq = line
                         comeco_seq = line.split(" ")
-                        comeco_seq = " ".join(comeco_seq[1:])
+                        comeco_seq = " ".join(comeco_seq[len(comeco_seq)-1])
                         comeco_seq = len(comeco_seq)
                         for i in range(len(line)-comeco_seq, len(line)):
                             if seq[i] != ' ':
@@ -379,14 +414,12 @@ class TelaPython:
                         line = line.strip("\n")
                         seq = line
                         comeco_seq = line.split(" ")
-                        comeco_seq = " ".join(comeco_seq[1:])
+                        comeco_seq = " ".join(comeco_seq[len(comeco_seq)-1])
                         comeco_seq = len(comeco_seq)
                         for i in range(len(line)-1, len(line)-comeco_seq-1, -1):
                             if seq[i] != ' ':
                                 fim_anterior = i + len(contig_final)
                                 break
-
-
 
 
                 if line.startswith("consensus"):
@@ -433,43 +466,33 @@ class TelaPython:
                 end_position = fim_anterior
             start_position = min(comeco_anterior, start_position)
             end_position = max(fim_anterior, end_position)
-        elif iteracao != 1:
+        else:
             print("O contig da iteração anterior não está presente nos contigs da iteração atual.")
         # Cortar o contig até as posições de início e fim
         trimmed_contig = contig_final[start_position:end_position]
 
         return trimmed_contig
 
-    def realizar_montagem(self, contig, id_contig, turbo, iteracao):
-        if turbo:
+    def realizar_montagem(self, contig, id_contig, turbo, ambas, iteracao):
+        if ambas:
             arq1 = open("temp/resultado1.fasta")
             filtradas1 = arq1.readlines()
             arq1.close()
             arq2 = open("temp/resultado2.fasta")
             filtradas2 = arq2.readlines()
             arq2.close()
-
         else:
             arq = open("temp/resultado.fasta")
             filtradas = arq.readlines()
             arq.close()
         
-        if (not turbo) or (turbo and iteracao == 1):
-            with open('temp/matches.fa', 'w') as arquivo:
-                arquivo.write(">contig1\n")
-                arquivo.write(f"{contig}\n")
-                arquivo.write(">contig2\n")
-                arquivo.write(f"{contig}\n")
-                if turbo:
-                    for linha in filtradas1:
-                        arquivo.write(linha)
-                    for linha in filtradas2:
-                        arquivo.write(linha)
-                if not turbo:
-                    for linha in filtradas:
-                        arquivo.write(linha)
-        else:
-            with open('temp/matches.fa', 'w') as arquivo_matches:
+        with open('temp/matches.fa', 'w') as arquivo_matches:
+            if (not turbo) or (turbo and iteracao == 1):
+                arquivo_matches.write(">contig1\n")
+                arquivo_matches.write(f"{contig}\n")
+                arquivo_matches.write(">contig2\n")
+                arquivo_matches.write(f"{contig}\n")
+            else:
                 with open('temp/matches.fa.cap.contigs', 'r') as arquivo_contigs:
                     cont = 1
                     for linha in arquivo_contigs:
@@ -478,21 +501,38 @@ class TelaPython:
                         arquivo_matches.write(linha)
                 arquivo_matches.write(f'>contig{cont}\n')
                 arquivo_matches.write(f'{contig}\n')
+            if ambas:
                 for linha in filtradas1:
                     arquivo_matches.write(linha)
                 for linha in filtradas2:
                     arquivo_matches.write(linha)
+            else:
+                for linha in filtradas:
+                    arquivo_matches.write(linha)
+
 
         print("Iniciando montagem.")
-        os.system("cap3 temp/matches.fa -p 98 > temp/consenso")
 
-        id_contig_formado = self.contig_with_most_reads("temp/consenso", id_contig)
+        if len(contig) < 30:
+            os.system(f"cap3 temp/matches.fa -o {len(contig)} -p 98 > temp/consenso")
+        else:
+            os.system("cap3 temp/matches.fa -p 98 > temp/consenso")
 
+        id_contig_formado, rev = self.contig_with_most_reads("temp/consenso", id_contig)
 
         if turbo:
             contig_trimmado = self.extract_contig_with_coverage("temp/consenso", id_contig_formado, id_contig, iteracao)
 
+            if rev:
+                contig_trimmado = self.reverso_complemento(contig_trimmado)
+
             if len(contig_trimmado) < len(contig):
+                print(f"Contig anterior: {id_contig}")
+                print(f'Tamanho contig anterior: {len(contig)}')
+                print(contig)
+                print(f'Contig novo: {id_contig_formado}')
+                print(f'Tamanho contig novo: {len(contig_trimmado)}')
+                print(contig_trimmado)
                 print("O contig diminuiu")
                 raise ValueError
         
@@ -507,6 +547,9 @@ class TelaPython:
             while linha and not linha.startswith('>'):
                 contig_formado += linha.strip()
                 linha = arquivo.readline()
+
+        if rev:
+            contig_formado = self.reverso_complemento(contig_formado)
 
         print("Montagem feita.")
 

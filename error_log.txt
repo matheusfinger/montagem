@@ -526,3 +526,46 @@ Traceback (most recent call last):
   File "/home/bioinformatica/Documentos/montagem/tela.py", line 476, in realizar_montagem
     raise ValueError
 ValueError
+2025-02-19 12:11:57,717 - ERROR - Erro ao processar sequenciamento: [Errno 2] No such file or directory: 'temp/resultado1.fasta'
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 58, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 120, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 190, in modo_turbo
+    match = self.executar_bbduk(diretorio, diretorio2, paired, kmer, kmer_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 270, in executar_bbduk
+    return self.contar_reads("temp/resultado1.fasta") + self.contar_reads("temp/resultado2.fasta")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 282, in contar_reads
+    with open(arquivo, 'r') as file:
+         ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'temp/resultado1.fasta'
+2025-02-19 14:35:27,628 - ERROR - Erro ao processar sequenciamento: 
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 58, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 128, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, extremidade, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 206, in modo_turbo
+    contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, ambas=False, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 531, in realizar_montagem
+    raise ValueError
+ValueError
+2025-02-19 14:58:40,465 - ERROR - Erro ao processar sequenciamento: 
+Traceback (most recent call last):
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 58, in iniciar
+    self.processar_sequenciamento(values)
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 128, in processar_sequenciamento
+    contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, extremidade, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 206, in modo_turbo
+    contigs = self.realizar_montagem(contig, id_contig = id_contig, turbo=True, ambas=False, iteracao = volta + 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bioinformatica/Documentos/montagem/tela.py", line 537, in realizar_montagem
+    raise ValueError
+ValueError
