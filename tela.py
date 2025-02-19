@@ -401,22 +401,18 @@ class TelaPython:
                     if line.startswith(contig_anterior) and not achou_comeco_anterior:
                         line = line.strip("\n")
                         seq = line
-                        comeco_seq = line.split(" ")
-                        comeco_seq = " ".join(comeco_seq[len(comeco_seq)-1])
-                        comeco_seq = len(comeco_seq)
-                        for i in range(len(line)-comeco_seq, len(line)):
+                        j = 0
+                        for i in range(len(line)-60, len(line)):
                             if seq[i] != ' ':
-                                comeco_anterior = i + len(contig_final)
+                                comeco_anterior = j + len(contig_final)
                                 achou_comeco_anterior = True
                                 break
+                            j += 1
                     
                     if line.startswith(contig_anterior):
                         line = line.strip("\n")
                         seq = line
-                        comeco_seq = line.split(" ")
-                        comeco_seq = " ".join(comeco_seq[len(comeco_seq)-1])
-                        comeco_seq = len(comeco_seq)
-                        for i in range(len(line)-1, len(line)-comeco_seq-1, -1):
+                        for i in range(len(line)-1, len(line)-61, -1):
                             if seq[i] != ' ':
                                 fim_anterior = i + len(contig_final)
                                 break
