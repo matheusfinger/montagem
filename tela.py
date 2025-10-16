@@ -92,7 +92,6 @@ class TelaPython:
         diretorio2 = values['diretorio2']
         extremidade5 = values['5']
         extremidade3 = values['3']
-        ambas = values['ambas']
 
         if extremidade5:
             extremidade = '5'
@@ -370,7 +369,7 @@ class TelaPython:
                     line = line.strip(" ")
                     if (contig_anterior is not None and line.startswith(contig_anterior)) or (contig_anterior is None):
                         contains = True
-                        if '+' in line:
+                        if '+' in line or contig_anterior is None:
                             print("A linha NÃO está no reverso com essa cara: ")
                             print(line)
                             rev_temp = False
