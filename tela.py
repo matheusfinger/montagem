@@ -2,8 +2,13 @@ import os
 import datetime
 import PySimpleGUI as sg
 import logging
+import time
 
 diminuicoes = 1
+
+
+if os.path.exists("error_log.txt"):
+    os.remove("error_log.txt")
 
 # Configuração do logging
 logging.basicConfig(filename='error_log.txt', level=logging.ERROR, 
@@ -15,7 +20,7 @@ class TelaPython:
 
         # Layout da interface gráfica
         layout = [
-            [sg.Image('icone2.png', size=(500, 231))],
+            [sg.Image('icone2.png', size=(1500, 160))],
             [sg.Text('Contig', size=(13, 1)), sg.Multiline(default_text="Insira aqui o contig", size=(200, 7), key='seq')],
             [sg.Text('Localização da biblioteca', size=(20, 2)),
              sg.Input(size=(50, 0), key='diretorio'), sg.FileBrowse()],
@@ -27,6 +32,10 @@ class TelaPython:
             [
                 sg.Text('Qual será o tamanho do k-mer utilizado?', size=(40, 2)),
                 sg.Input(size=(15,0), key='kmer_size')
+            ],
+            [
+                sg.Text('Qual será o número de mismatches permitidos no kmer?', size=(40, 2)),
+                sg.Input(size=(15,0), key='num_mismatch')
             ],
             [sg.Text("Deseja alongar a extremidade 3', 5' ou ambas?"),
              sg.Radio("5'", "extremidade", key="5", default=True), sg.Radio("3'", "extremidade", key="3"), sg.Radio("Ambas", "extremidade", key="ambas")],
@@ -69,6 +78,12 @@ class TelaPython:
             sg.popup_error("Insira um número válido para o tamanho do k-mer.")
             return
 
+        try:
+            num_mismatch = int(values['num_mismatch'])
+        except ValueError:
+            sg.popup_error("Insira um número válido para o número de mismatches.")
+            return
+        
         if not diretorio or not os.path.exists(diretorio):
             sg.popup_error("Arquivo da biblioteca não encontrado!")
             return
@@ -125,9 +140,9 @@ class TelaPython:
         self.remover_arquivos_passados()
 
         if turbo:
-            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, extremidade, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar)
+            contig_final, tamanho = self.modo_turbo(diretorio, diretorio2, paired, kmer, kmer_size, num_mismatch, extremidade, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar)
         else:
-            contig_final, tamanho = self.modo_normal(diretorio, diretorio2, paired, kmer, kmer_size, contig)
+            contig_final, tamanho = self.modo_normal(diretorio, diretorio2, paired, kmer, kmer_size, num_mismatch, contig)
 
         print(f"O maior contig gerado foi:\n{contig_final}\nO contig possui tamanho {tamanho}.")
 
@@ -184,7 +199,7 @@ class TelaPython:
         return res
 
 
-    def modo_turbo(self, diretorio, diretorio2, paired, kmer, kmer_size, extremidade, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar):
+    def modo_turbo(self, diretorio, diretorio2, paired, kmer, kmer_size, num_mismatch, extremidade, contig, voltar, voltar_nuc, parar_tamanho, qtd_parar):
         continuar = True
         volta = 0
         pula = False
@@ -197,7 +212,7 @@ class TelaPython:
             print(datetime.datetime.now())
             
             if not pula:
-                match = self.executar_bbduk(diretorio, diretorio2, paired, kmer, kmer_size)
+                match = self.executar_bbduk(diretorio, diretorio2, paired, kmer, kmer_size, num_mismatch)
 
             print(f'Análise das reads finalizada. {match} reads mapearam.')
             if type(kmer) == tuple:
@@ -261,18 +276,19 @@ class TelaPython:
                 continuar = False
                 if match < 3:
                     print(f'Parou na {volta + 1}ª iteração por falta de matches.')
-                elif tam_contig >= 3000:
+                elif tam_contig >= qtd_parar:
                     print(f'Parou pq o tamanho do contig passou do corte')
                 elif num_pula >= 4:
                     print(f'Ta repetindo o(s) kmer(s)')
                 else:
                     print('Número máximo de iterações alcançado.')
-
+        if contig_fim is None:
+            raise ValueError("Erro: a montagem falhou e retornou None.")
         return contig_fim, len(contig_fim)
 
-    def modo_normal(self, diretorio, diretorio2, paired, kmer, kmer_size, contig):
+    def modo_normal(self, diretorio, diretorio2, paired, kmer, kmer_size, num_mismatch, contig):
         print("Executando bbduk")
-        match = self.executar_bbduk(diretorio, diretorio2, paired, kmer, kmer_size)
+        match = self.executar_bbduk(diretorio, diretorio2, paired, kmer, kmer_size, num_mismatch)
         print("Executando cap3")
 
         if type(kmer) == tuple:
@@ -282,25 +298,25 @@ class TelaPython:
 
         return contig_fim, len(contig_fim)
 
-    def executar_bbduk(self, diretorio, diretorio2, paired, kmer, kmer_size):
+    def executar_bbduk(self, diretorio, diretorio2, paired, kmer, kmer_size, num_mismatch):
         if type(kmer) is tuple:
             kmer1, kmer2 = kmer
             if paired:
                 print("Analisando kmer 5'")
-                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=temp/resultado1.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
+                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} hdist={num_mismatch} outm=temp/resultado1.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
                 print("Analisando kmer 3'")
-                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=temp/resultado2.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
+                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} hdist={num_mismatch} outm=temp/resultado2.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
             else:
                 print("Analisando kmer 5'")
-                os.system(f'bbduk.sh in={diretorio} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
+                os.system(f'bbduk.sh in={diretorio} hdist={num_mismatch} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer1}')
                 print("Analisando kmer 3'")
-                os.system(f'bbduk.sh in={diretorio} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
+                os.system(f'bbduk.sh in={diretorio} hdist={num_mismatch} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer2}')
             return self.contar_reads("temp/resultado1.fasta") + self.contar_reads("temp/resultado2.fasta")
         else:
             if paired:
-                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
+                os.system(f'bbduk.sh in1={diretorio} in2={diretorio2} hdist={num_mismatch} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
             else:
-                os.system(f'bbduk.sh in={diretorio} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
+                os.system(f'bbduk.sh in={diretorio} hdist={num_mismatch} outm=temp/resultado.fasta rcomp=True mm=f k={kmer_size} threads=6 literal={kmer}')
 
             return self.contar_reads("temp/resultado.fasta")
 
@@ -354,9 +370,13 @@ class TelaPython:
                     line = line.strip(" ")
                     if (contig_anterior is not None and line.startswith(contig_anterior)) or (contig_anterior is None):
                         contains = True
-                        if line[len(contig_anterior):len(contig_anterior)+1] == '+':
+                        if '+' in line:
+                            print("A linha NÃO está no reverso com essa cara: ")
+                            print(line)
                             rev_temp = False
                         else:
+                            print("A linha está no reverso com essa cara: ")
+                            print(line)
                             rev_temp = True
                     num_reads += 1
                 line = arq.readline()
@@ -481,7 +501,7 @@ class TelaPython:
             arq = open("temp/resultado.fasta")
             filtradas = arq.readlines()
             arq.close()
-        
+        time.sleep(1)
         with open('temp/matches.fa', 'w') as arquivo_matches:
             if (not turbo) or (turbo and iteracao == 1):
                 arquivo_matches.write(">contig1\n")
@@ -489,6 +509,7 @@ class TelaPython:
                 arquivo_matches.write(">contig2\n")
                 arquivo_matches.write(f"{contig}\n")
             else:
+                time.sleep(1)
                 with open('temp/matches.fa.cap.contigs', 'r') as arquivo_contigs:
                     cont = 1
                     for linha in arquivo_contigs:
@@ -509,7 +530,7 @@ class TelaPython:
 
         print("Iniciando montagem.")
 
-        if len(contig) < 30:
+        if len(contig) < 40:
             os.system(f"cap3 temp/matches.fa -o {len(contig)} -p 98 > temp/consenso")
         else:
             os.system("cap3 temp/matches.fa -p 98 > temp/consenso")
@@ -534,7 +555,7 @@ class TelaPython:
         
         id_contig_formado = id_contig_formado.replace(" ", "")
         contig_formado = ""
-
+        time.sleep(1)
         with open('temp/matches.fa.cap.contigs', 'r') as arquivo:
             linha = arquivo.readline()
             while linha and not linha.startswith(f'>{id_contig_formado}'):
