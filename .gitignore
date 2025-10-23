@@ -1,3 +1,4 @@
-error_log.txt
-temp/
-montagem.desktop
+./error_log.txt
+./temp/
+./montagem.desktop
+./*.log

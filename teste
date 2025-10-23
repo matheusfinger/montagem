@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Test
-Exec=python3 /home/research/Documentos/matheus/graphic/tela.py
-Terminal=true
-Type=Application
-Icon = /home/research/Documentos/matheus/graphic/dna.png
